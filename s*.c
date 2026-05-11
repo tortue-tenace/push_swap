@@ -6,16 +6,16 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 11:21:40 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/11 12:50:57 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/11 16:28:16 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_push_swap **a)
+void	sa(t_list **a)
 {
-	t_push_swap	*first;
-	t_push_swap	*second;
+	t_list	*first;
+	t_list	*second;
 
 	if (ft_lstsize(*a) <= 1)
 		return ;
@@ -26,10 +26,10 @@ void	sa(t_push_swap **a)
 	*a = second;
 }
 
-void	sb(t_push_swap **b)
+void	sb(t_list **b)
 {
-	t_push_swap	*first;
-	t_push_swap	*second;
+	t_list	*first;
+	t_list	*second;
 
 	if (ft_lstsize(*b) <= 1)
 		return ;
@@ -40,7 +40,7 @@ void	sb(t_push_swap **b)
 	*b = second;
 }
 
-void	ss(t_push_swap **a, t_push_swap **b)
+void	ss(t_list **a, t_list **b)
 {
 	if (ft_lstsize(*b) <= 1 || ft_lstsize(*a) <= 1)
 		return ;

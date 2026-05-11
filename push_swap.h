@@ -6,7 +6,7 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 11:13:18 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/11 14:48:53 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/11 17:21:24 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,35 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
-# include <libft.h>
+# include <stdio.h>
 
-typedef struct t_push_swap
+typedef struct t_list
 {
 	int					data;
-	struct push_swap	*next;
-}	t_push_swap;
+	struct t_list	*next;
+}	t_list;
 
-int	get_at(t_push_swap *a, int index);
-unsigned int	ft_compute_disorder(t_push_swap **a);
-void	pa(t_push_swap **b, t_push_swap **a);
-void	pb(t_push_swap **a, t_push_swap **b);
-void	ss(t_push_swap **a, t_push_swap **b);
-void	sb(t_push_swap **b);
-void	sa(t_push_swap **a);
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
+
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	last = ft_lstlast(*lst);
+	last->next = new;
+}
+
+int	get_at(t_list *a, int index);
+unsigned int	ft_compute_disorder(t_list **a);
+void	pa(t_list **b, t_list **a);
+void	pb(t_list **a, t_list **b);
+void	ss(t_list **a, t_list **b);
+void	sb(t_list **b);
+void	sa(t_list **a);
 
 #endif

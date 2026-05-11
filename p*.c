@@ -6,15 +6,15 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 12:19:20 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/11 12:54:19 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/11 16:28:34 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pa(t_push_swap **b, t_push_swap **a)
+void	pa(t_list **b, t_list **a)
 {
-	t_push_swap	*tmp;
+	t_list	*tmp;
 
 	if (!*b)
 		return ;
@@ -24,9 +24,9 @@ void	pa(t_push_swap **b, t_push_swap **a)
 	*b = tmp;
 }
 
-void	pb(t_push_swap **a, t_push_swap **b)
+void	pb(t_list **a, t_list **b)
 {
-	t_push_swap	*tmp;
+	t_list	*tmp;
 
 	if (!*a)
 		return ;
