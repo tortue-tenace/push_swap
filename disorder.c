@@ -6,40 +6,11 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:18:10 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/11 17:22:51 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/11 18:06:33 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	get_at(t_list *a, int index)
-{
-	while (index--)
-		a = a->next;
-	return (a->data);
-}
-
-int     get_data(t_list *a)
-{
-    if (!a)
-        return (0);
-    return (a->data);
-}
-
-int     ft_sqrt_int(int n)
-{
-	int i;
-
-	i = 0;
-	while (i * i <= n)
-		i++;
-	return (i - 1);
-}
-
-int	get_data(t_list **a)
-{
-	return ((*a)->data);
-}
 
 unsigned int	ft_compute_disorder(t_list **a)
 {
@@ -57,7 +28,7 @@ unsigned int	ft_compute_disorder(t_list **a)
 		while (j <= ft_lstsize(*a))
 		{
 			total_pairs += 1;
-			if (get_at(a, i) > get_at(a, j))
+			if (get_at(*a, i) > get_at(*a, j))
 				mistakes += 1;
 		}
 		i++;
@@ -101,7 +72,7 @@ void print_stack(char *name, t_list *stack)
     {
         // On utilise ici get_value si c'est ta fonction pour récupérer la valeur,
         // sinon tu peux remplacer par stack->value.
-        printf("[%d] -> ", get_value(stack)); 
+        printf("[%d] -> ", get_data(stack)); 
         stack = stack->next;
     }
     printf("NULL\n");
