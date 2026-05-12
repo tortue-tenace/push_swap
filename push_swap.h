@@ -24,8 +24,8 @@ typedef struct t_list
 
 void	ft_lstadd_back(t_list **lst, t_list *new);
 int	get_at(t_list *a, int index);
-unsigned int	ft_compute_disorder(t_list **a);
-void	pa(t_list **b, t_list **a);
+float	ft_compute_disorder(t_list **a);
+void	pa(t_list **a, t_list **b);
 void	pb(t_list **a, t_list **b);
 void	ss(t_list **a, t_list **b);
 void	sb(t_list **b);
@@ -35,6 +35,12 @@ int	ft_lstsize(t_list *lst);
 int     ft_sqrt_int(int n);
 int	get_at(t_list *a, int index);
 int     get_data(t_list *a);
-void    ra(t_list **a);
+void	ra(t_list **a);
+void	rb(t_list **b);
+void	rr(t_list **a, t_list **b);
+void	rra(t_list **a);
+void	rrb(t_list **b);
+void	rrr(t_list **a, t_list **b);
+void	ft_chunk_sort(t_list **a, t_list **b);
 
 #endif

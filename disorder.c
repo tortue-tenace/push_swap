@@ -12,51 +12,97 @@
 
 #include "push_swap.h"
 
-unsigned int	ft_compute_disorder(t_list **a)
+float	ft_compute_disorder(t_list **a)
 {
 	unsigned int	i;
 	unsigned int	j;
 	unsigned int	mistakes;
 	unsigned int	total_pairs;
+	unsigned int	size;
 
 	mistakes = 0;
-	i = 0;
 	total_pairs = 0;
-	while (i <= ft_lstsize(*a) - 1)
+	size = ft_lstsize(*a);
+	i = 0;
+	while (i + 1 < size)
 	{
 		j = i + 1;
-		while (j <= ft_lstsize(*a))
+		while (j < size)
 		{
-			total_pairs += 1;
+			total_pairs++;
 			if (get_at(*a, i) > get_at(*a, j))
-				mistakes += 1;
+				mistakes++;
+			j++;
 		}
 		i++;
 	}
-	return ((float)(mistakes / total_pairs));
+	if (total_pairs == 0)
+		return (0.0f);
+	return ((float)mistakes / (float)total_pairs);
 }
 
-void    ft_chunk_sort(t_list **a, t_list **b)
+static int	ft_find_max_b(t_list *b)
+{
+	int	max;
+
+	max = b->data;
+	b = b->next;
+	while (b)
+	{
+		if (b->data > max)
+			max = b->data;
+		b = b->next;
+	}
+	return (max);
+}
+
+static void	ft_push_chunk(t_list **a, t_list **b, int max_val)
+{
+	int	len;
+	int	i;
+
+	len = ft_lstsize(*a);
+	i = 0;
+	while (i < len && *a)
+	{
+		if (get_data(*a) < max_val)
+			pb(a, b);
+		else
+		{
+			ra(a);
+			i++;
+		}
+	}
+}
+
+static void	ft_back_to_a(t_list **a, t_list **b)
+{
+	int	max;
+
+	while (*b)
+	{
+		max = ft_find_max_b(*b);
+		while (get_data(*b) != max)
+			rb(b);
+		pa(a, b);
+	}
+}
+
+void	ft_chunk_sort(t_list **a, t_list **b)
 {
 	int	chunk_size;
 	int	chunk;
-	int	size;
 
-	size = ft_lstsize(*a);
-	chunk_size = ft_sqrt_int(size);
+	chunk_size = ft_sqrt_int(ft_lstsize(*a));
+	if (chunk_size < 1)
+		chunk_size = 1;
 	chunk = 0;
 	while (*a)
 	{
-		if (get_data(*a) < chunk_size * (chunk + 1))
-		{
-			pb(a, b);
-			chunk++;
-		}
-		else
-			ra(a);
+		ft_push_chunk(a, b, chunk_size * (chunk + 1));
+		chunk++;
 	}
-	while (*b)
-		pa(a, b);
+	ft_back_to_a(a, b);
 }
 #include <stdio.h>
 
