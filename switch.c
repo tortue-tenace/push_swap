@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s*.c                                               :+:      :+:    :+:   */
+/*   switch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 11:21:40 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/11 16:28:16 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/12 15:20:03 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	sa(t_list **a)
 	first->next = second->next;
 	second->next = first;
 	*a = second;
+	ft_printf("%s\n", "sa");
 }
 
 void	sb(t_list **b)
@@ -38,6 +39,7 @@ void	sb(t_list **b)
 	first->next = second->next;
 	second->next = first;
 	*b = second;
+	ft_printf("%s\n", "sb");
 }
 
 void	ss(t_list **a, t_list **b)
@@ -46,4 +48,5 @@ void	ss(t_list **a, t_list **b)
 		return ;
 	sb(b);
 	sa(a);
+	ft_printf("%s\n", "ss");
 }

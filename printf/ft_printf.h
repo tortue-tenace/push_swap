@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p*.c                                               :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/11 12:19:20 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/11 16:28:34 by thattal          ###   ########.fr       */
+/*   Created: 2026/04/28 10:04:57 by thattal           #+#    #+#             */
+/*   Updated: 2026/04/29 12:19:52 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void	pa(t_list **a, t_list **b)
-{
-	t_list	*tmp;
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
 
-	if (!*b)
-		return ;
-	tmp = (*b)->next;
-	(*b)->next = *a;
-	*a = *b;
-	*b = tmp;
-}
+int	ft_printf(const char *format, ...);
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_putnbr(long n, int base, char *symbols);
+int	ft_putp(void *x);
 
-void	pb(t_list **a, t_list **b)
-{
-	t_list	*tmp;
-
-	if (!*a)
-		return ;
-	tmp = (*a)->next;
-	(*a)->next = *b;
-	*b = *a;
-	*a = tmp;
-}
+#endif
