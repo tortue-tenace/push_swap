@@ -32,3 +32,28 @@ void	rrr(t_list **a, t_list **b)
 	rrb(b);
 	ft_printf("%s\n", "rrr");
 }
+
+t_list	*ft_lstnew(int number)
+{
+	t_list		*new;
+	static int	i = 0;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->data = number;
+	new->index = i;
+	i++;
+	new->next = NULL;
+	return (new);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}

@@ -5,107 +5,136 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/12 15:40:00 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/12 15:40:00 by thattal          ###   ########.fr       */
+/*   Created: 2026/05/13 10:59:26 by lmurie            #+#    #+#             */
+/*   Updated: 2026/05/13 15:10:01 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	*ft_save_orig(t_list *a, int size)
+int min (t_list **a)
 {
-	int	*orig;
+	int minvalue;
+	int size;
 	int	i;
+	t_list **temp;
 
-	orig = malloc(sizeof(int) * size);
-	if (!orig)
-		return (NULL);
 	i = 0;
-	while (a)
+	temp = a;
+	size = ft_lstsize(*a);
+	minvalue = (*a)->data;
+	while (i < size - 1)
 	{
-		orig[i++] = a->data;
-		a = a->next;
+		if ((*temp)->data < minvalue)
+			minvalue = (*temp)->data;
+		i++;
+		(temp) = &(*temp)->next;
 	}
-	return (orig);
+	return (minvalue);
 }
 
-static int	ft_get_rank(t_list *a, int *orig, int idx)
+int max (t_list **a)
 {
-	int	rank;
+	int maxvalue;
+	int size;
+	int	i;
+	t_list **temp;
+
+	i = 0;
+	temp = a;
+	size = ft_lstsize(*a);
+	maxvalue = (*a)->data;
+	while (i < size)
+	{
+		if ((*temp)->data > maxvalue)
+			maxvalue = (*temp)->data;
+		i++;
+		(temp) = &(*temp)->next;
+	}
+	return (maxvalue);
+}
+
+
+char	*decimaltobinary(int a)
+{
+	char *tab;
+	int	i;
+
+	i = 0;
+	tab=malloc(sizeof(char) * 100);
+	while (a != 0)
+	{
+		tab[i] = a%2 + '0';
+		printf("%d", a%2);
+		a /= 2;
+		i++;
+
+	}
+	tab[i] = '\0';
+	return (tab);
+}
+void adddel_min(t_list **a, int min, int sorted)
+{
+	t_list *temp;
+
+	temp = (*a);
+	if (sorted == 0)
+	{
+		while (temp)
+		{
+			(temp)->data -= min;
+			(temp) = (temp)->next;
+		}
+	}
+	else 
+	{ 
+		while (temp)
+		{
+			(temp)->data += min;
+			(temp) = (temp)->next;
+		}
+	}
+}
+
+void ft_radix_sort(t_list **a, t_list **b)
+{
+	int i;
+	int nbdigits;
+	int size;
 	int	j;
 
-	rank = 0;
-	j = 0;
-	while (a)
-	{
-		if (orig[j] < orig[idx])
-			rank++;
-		a = a->next;
-		j++;
-	}
-	return (rank);
-}
-
-static void	ft_normalize(t_list **a)
-{
-	t_list	*curr;
-	int		*orig;
-	int		size;
-	int		i;
-
-	size = ft_lstsize(*a);
-	orig = ft_save_orig(*a, size);
-	if (!orig)
-		return ;
-	curr = *a;
+	
+	int temp;
+	
+	temp = 0;
+	
 	i = 0;
-	while (curr)
-	{
-		curr->data = ft_get_rank(*a, orig, i);
-		curr = curr->next;
-		i++;
-	}
-	free(orig);
-}
-
-static int	ft_bit_count(int n)
-{
-	int	bits;
-
-	bits = 0;
-	while (n > 0)
-	{
-		bits++;
-		n >>= 1;
-	}
-	return (bits);
-}
-
-void	ft_radix_sort(t_list **a, t_list **b)
-{
-	int	size;
-	int	bits;
-	int	bit;
-	int	i;
-
+	j = 0;
 	size = ft_lstsize(*a);
-	if (size <= 1)
-		return ;
-	ft_normalize(a);
-	bits = ft_bit_count(size);
-	bit = 0;
-	while (bit < bits)
+	if (min(a) < 0)
 	{
-		i = size;
-		while (i--)
+		temp = min(a);
+		adddel_min(a, temp, j);
+	}
+	
+	nbdigits = ft_strlen(decimaltobinary(max(a)));
+	while (j < nbdigits)
+	{
+		while (i < size)
 		{
-			if ((get_data(*a) >> bit) & 1)
+			if (((*a)->data >> j) & 1)
 				ra(a);
 			else
 				pb(a, b);
+			i++;
 		}
 		while (*b)
-			pa(a, b);
-		bit++;
+			pa(a,b);
+		i = 0;
+		j++;
 	}
+	
+	if (temp < 0)
+		adddel_min(a, temp, j);
+	
 }
