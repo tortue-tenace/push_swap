@@ -6,16 +6,16 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 15:51:26 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/13 16:02:43 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/14 by thattal                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-static int	*ft_save_orig(t_list *a, int size)
+int	*ft_save_orig(t_list *a, int size)
 {
-	int		*orig;
-	int		i;
+	int	*orig;
+	int	i;
 
 	orig = malloc(sizeof(int) * size);
 	i = 0;
@@ -27,15 +27,46 @@ static int	*ft_save_orig(t_list *a, int size)
 	return (orig);
 }
 
-void	ft_normalize(t_list *a)
+void	ft_sorted_orig(int *orig, int *sorted, int size)
 {
-	int		*orig;
-	int		size;
-	int		ki;
-	int		kj;
+	int	i;
+	int	j;
+	int	swap;
 
-	size = ft_lstsize(a);
-	orig = ft_save_orig(a, size);
+	i = 0;
+	while (i < size)
+	{
+		sorted[i] = orig[i];
+		j = i;
+		while (j > 0 && sorted[j - 1] > sorted[j])
+		{
+			swap = sorted[j];
+			sorted[j] = sorted[j - 1];
+			sorted[j - 1] = swap;
+			j--;
+		}
+		i++;
+	}
+}
+
+void	ft_restore(t_list *a, int *sorted)
+{
+	int	i;
+
+	i = 0;
+	while (a)
+	{
+		a->data = sorted[i];
+		i++;
+		a = a->next;
+	}
+}
+
+void	ft_normalize(t_list *a, int *orig, int size)
+{
+	int	ki;
+	int	kj;
+
 	ki = 0;
 	while (a)
 	{
@@ -50,5 +81,4 @@ void	ft_normalize(t_list *a)
 		a = a->next;
 		ki++;
 	}
-	free(orig);
 }

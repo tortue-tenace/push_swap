@@ -6,11 +6,11 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:18:10 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/13 16:06:15 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/14 12:15:27 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 static int	ft_find_max_b(t_list *b)
 {
@@ -53,26 +53,28 @@ static void	ft_rotate_to_max(t_list **b, int max)
 	}
 }
 
-static void	ft_push_chunk(t_list **a, t_list **b, int min_val, int max_val)
+static void ft_push_chunk(t_list **a, t_list **b, int min_val, int max_val)
 {
-	int	len;
-	int	i;
+    int len;
+    int i;
 
-	len = ft_lstsize(*a);
-	i = 0;
-	while (i < len && *a)
-	{
-		if (get_data(*a) >= min_val && get_data(*a) < max_val)
-		{
-			pb(a, b);
-			i++;
-		}
-		else
-		{
-			ra(a);
-			i++;
-		}
-	}
+    len = ft_lstsize(*a);
+    i = 0;
+    while (i < len && *a)
+    {
+        if (get_data(*a) >= min_val && get_data(*a) < max_val)
+        {
+            pb(a, b);
+            len--;
+            if (*b && (*b)->next && get_data(*b) < (*b)->next->data)
+                rb(b);
+        }
+        else
+        {
+            ra(a);
+            i++;
+        }
+    }
 }
 
 static void	ft_back_to_a(t_list **a, t_list **b)
@@ -87,6 +89,29 @@ static void	ft_back_to_a(t_list **a, t_list **b)
 	}
 }
 
+static int	*ft_prepare(t_list *a, int size)
+{
+	int	*orig;
+	int	*sorted;
+
+	orig = ft_save_orig(a, size);
+	sorted = malloc(sizeof(int) * size);
+	ft_sorted_orig(orig, sorted, size);
+	ft_normalize(a, orig, size);
+	free(orig);
+	return (sorted);
+}
+
+static int	ft_chunk_size(int size)
+{
+	int	nb_chunks;
+
+	nb_chunks = ft_sqrt_int(size);
+	if (nb_chunks < 1)
+		nb_chunks = 1;
+	return ((size + nb_chunks - 1) / nb_chunks);
+}
+
 void	ft_chunk_sort(t_list **a, t_list **b)
 {
 	int	size;
@@ -94,13 +119,12 @@ void	ft_chunk_sort(t_list **a, t_list **b)
 	int	chunk;
 	int	min_val;
 	int	max_val;
+	int	*sorted;
 
 	size = ft_lstsize(*a);
-	chunk_size = ft_sqrt_int(size);
-	if (chunk_size < 1)
-		chunk_size = 1;
+	sorted = ft_prepare(*a, size);
+	chunk_size = ft_chunk_size(size);
 	chunk = 0;
-	ft_normalize(*a);
 	while (*a)
 	{
 		min_val = chunk_size * chunk;
@@ -109,4 +133,6 @@ void	ft_chunk_sort(t_list **a, t_list **b)
 		chunk++;
 	}
 	ft_back_to_a(a, b);
+	ft_restore(*a, sorted);
+	free(sorted);
 }

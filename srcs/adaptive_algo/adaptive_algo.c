@@ -6,11 +6,11 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:05:12 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/12 15:24:26 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/14 12:21:01 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 float	ft_compute_disorder(t_list **a)
 {

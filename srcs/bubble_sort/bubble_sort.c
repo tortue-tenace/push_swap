@@ -6,11 +6,11 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:35:56 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/13 11:29:26 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/14 12:16:29 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	ft_bubble_sort(t_list **a)
 {

@@ -6,14 +6,14 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 11:13:18 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/13 15:53:50 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/14 12:20:24 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "./printf/ft_printf.h"
+# include "../printf/ft_printf.h"
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -50,6 +50,10 @@ void				ft_adaptiv_alg(float disorder, t_list **stack_a,
 						t_list **stack_b);
 t_list				*ft_lstnew(int number);
 int					ft_strlen(char *str);
-void				ft_normalize(t_list *a);
+void				ft_normalize(t_list *a, int *orig, int size);
+int					*ft_save_orig(t_list *a, int size);
+void				ft_sorted_orig(int *orig, int *sorted, int size);
+void				ft_restore(t_list *a, int *sorted);
+void				ft_normalize(t_list *a, int *orig, int size);
 
 #endif

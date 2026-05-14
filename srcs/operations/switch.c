@@ -6,11 +6,11 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 11:21:40 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/12 15:20:03 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/14 12:15:49 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	sa(t_list **a)
 {
