@@ -6,13 +6,13 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 18:03:30 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/14 12:15:44 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/14 13:27:15 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ra(t_list **a)
+void	ra(t_list **a, t_count	*bench_count)
 {
 	t_list	*top;
 	t_list	*last;
@@ -25,9 +25,11 @@ void	ra(t_list **a)
 	last = ft_lstlast(*a);
 	last->next = top;
 	ft_printf("%s\n", "ra");
+	bench_count->ra++;
+	bench_count->total++;
 }
 
-void	rb(t_list **b)
+void	rb(t_list **b, t_count	*bench_count)
 {
 	t_list	*top;
 	t_list	*last;
@@ -40,16 +42,22 @@ void	rb(t_list **b)
 	last = ft_lstlast(*b);
 	last->next = top;
 	ft_printf("%s\n", "rb");
+	bench_count->rb++;
+	bench_count->total++;
 }
 
-void	rr(t_list **a, t_list **b)
+void	rr(t_list **a, t_list **b, t_count	*bench_count)
 {
-	rb(b);
-	rb(a);
+	rb(b, bench_count);
+	ra(a, bench_count);
 	ft_printf("%s\n", "rr");
+	bench_count->rr++;
+	bench_count->rb--;
+	bench_count->ra--;
+	bench_count->total = bench_count->total - 1;
 }
 
-void	rra(t_list **a)
+void	rra(t_list **a, t_count	*bench_count)
 {
 	t_list	*last;
 	t_list	*beforelast;
@@ -68,9 +76,11 @@ void	rra(t_list **a)
 	last->next = *temp;
 	*a = last;
 	ft_printf("%s\n", "rra");
+	bench_count->rra++;
+	bench_count->total++;
 }
 
-void	rrb(t_list **b)
+void	rrb(t_list **b, t_count	*bench_count)
 {
 	t_list	*last;
 	t_list	*beforelast;
@@ -89,4 +99,6 @@ void	rrb(t_list **b)
 	last->next = *temp;
 	*b = last;
 	ft_printf("%s\n", "rrb");
+	bench_count->rrb++;
+	bench_count->total++;
 }

@@ -5,17 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/12 14:53:27 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/14 12:11:31 by thattal          ###   ########.fr       */
+/*   Created: 2026/05/13 14:01:35 by lmurie            #+#    #+#             */
+/*   Updated: 2026/05/14 15:50:36 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*static int	is_space(char c)
+int	ft_strncmp(char *s1, char *s2, int n)
 {
-	return (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r');
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}
+
+static int	is_space(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r');
 }
 
 int	ft_atoi(const char *str)
@@ -43,124 +57,110 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-static int	has_duplicate(t_list *lst, int val)
+int	isflag(char *s)
 {
-	while (lst)
-	{
-		if (lst->data == val)
-			return (1);
-		lst = lst->next;
-	}
-	return (0);
+	if (ft_strncmp(s, "--simple", ft_strlen(s)) == 0)
+		return (1);
+	else if (ft_strncmp(s, "--medium", ft_strlen(s)) == 0)
+		return (1);
+	else if (ft_strncmp(s, "--complex", ft_strlen(s)) == 0)
+		return (1);
+	else if (ft_strncmp(s, "--adaptive", ft_strlen(s)) == 0)
+		return (1);
+	else if (ft_strncmp(s, "--bench", ft_strlen(s)) == 0)
+		return (1);
+	else
+		return (0);
 }
 
-static int	is_sorted(t_list *a)
+void	detectflags(int argc, char *argv[], int flags[1])
 {
-	while (a && a->next)
+	int	i;
+
+	i = 1;
+	flags[0] = 0;
+	flags[1] = 0;
+	while (i < argc && isflag(argv[i]))
 	{
-		if (a->data > a->next->data)
-			return (0);
-		a = a->next;
+		if (ft_strncmp(argv[i], "--simple", ft_strlen(argv[i])) == 0)
+			flags[0] = 1;
+		else if (ft_strncmp(argv[i], "--medium", ft_strlen(argv[i])) == 0)
+			flags[0] = 2;
+		else if (ft_strncmp(argv[i], "--complex", ft_strlen(argv[i])) == 0)
+			flags[0] = 3;
+		else if (ft_strncmp(argv[i], "--bench", ft_strlen(argv[i])) == 0)
+			flags[1] = 1;
+		i++;
 	}
-	return (1);
 }
 
-int	main(int ac, char **ag)
+int	main(int argc, char *argv[])
 {
-}*/
-#include <stdio.h>
-#include <stdlib.h>
-
-int	main(void)
-{
-	t_list *liste;
-	t_list *listeb;
-	t_list *tmp;
-	t_list *tmpb;
-	int a1 = 145;
-	int a2 = 65;
-	int a3 = 156;
-	int a4 = -145;
-	int a5 = 600;
-	int a6 = 23;
-	int a7 = -78;
-	int a8 = 412;
-	int a9 = -300;
-	int a10 = 89;
-	int a11 = -456;
-	int a12 = 234;
-	int a13 = 17;
-	int a14 = -89;
-	int a15 = 378;
-	int a16 = -234;
-	int a17 = 501;
-	int a18 = -12;
-	int a19 = 67;
-	int a20 = -389;
-	int a21 = 123;
-	int a22 = -422;
-	int a23 = 289;
-	int a24 = -178;
-	//int a25 = 434;
+	t_list	*liste;
+	t_list	*listeb;
+	t_list	*tmp;
+	t_list	*tmpb;
+	t_count	bench_count;
+	int		i;
+	int		j;
+	int		flags[1];
 
 	liste = NULL;
 	listeb = NULL;
-	ft_lstadd_back(&liste, ft_lstnew(a1));
-	ft_lstadd_back(&liste, ft_lstnew(a2));
-	ft_lstadd_back(&liste, ft_lstnew(a3));
-	ft_lstadd_back(&liste, ft_lstnew(a4));
-	ft_lstadd_back(&liste, ft_lstnew(a5));
-	ft_lstadd_back(&liste, ft_lstnew(a6));
-	ft_lstadd_back(&liste, ft_lstnew(a7));
-	ft_lstadd_back(&liste, ft_lstnew(a8));
-	ft_lstadd_back(&liste, ft_lstnew(a9));
-	ft_lstadd_back(&liste, ft_lstnew(a10));
-	ft_lstadd_back(&liste, ft_lstnew(a11));
-	ft_lstadd_back(&liste, ft_lstnew(a12));
-	ft_lstadd_back(&liste, ft_lstnew(a13));
-	ft_lstadd_back(&liste, ft_lstnew(a14));
-	ft_lstadd_back(&liste, ft_lstnew(a15));
-	ft_lstadd_back(&liste, ft_lstnew(a16));
-	ft_lstadd_back(&liste, ft_lstnew(a17));
-	ft_lstadd_back(&liste, ft_lstnew(a18));
-	ft_lstadd_back(&liste, ft_lstnew(a19));
-	ft_lstadd_back(&liste, ft_lstnew(a20));
-	ft_lstadd_back(&liste, ft_lstnew(a21));
-	ft_lstadd_back(&liste, ft_lstnew(a22));
-	ft_lstadd_back(&liste, ft_lstnew(a23));
-	ft_lstadd_back(&liste, ft_lstnew(a24));
-	//ft_lstadd_back(&liste, ft_lstnew(a25));
-	//ft_printf("Avant : ");
+	i = 1;
+	j = 1;
+	if (argc == 1)
+		printf("Il faut mettre au moins un arg \n");
+	detectflags(argc, argv, flags);
+	while (i < argc)
+	{
+		j = 1;
+		while (j < i)
+		{
+			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+			{
+				printf("il y a un nombre en double /n");
+				return (0);
+			}
+			j++;
+		}
+		ft_lstadd_back(&liste, ft_lstnew(ft_atoi(argv[i])));
+		j = i;
+		i++;
+	}
+	ft_printf("Avant : ");
 	tmp = liste;
 	tmpb = listeb;
 	while (tmp)
 	{
-		//t_printf("%d ->", tmp->data);
+		ft_printf("%d ->", tmp->data);
 		tmp = tmp->next;
 	}
-	//ft_printf("NULL\n");
-
-	// ft_radix_sort(&liste, &listeb);
-	// ft_bubble_sort(&liste);
-	// selectionsort(&liste, &listeb);
-	ft_chunk_sort(&liste, &listeb);
-
-	//ft_printf("Apres : ");
+	ft_printf("NULL\n");
+	if (flags[0] == 1)
+		ft_bubble_sort(&liste, &bench_count);
+	if (flags[0] == 2)
+		ft_chunk_sort(&liste, &listeb, &bench_count);
+	if (flags[0] == 3)
+		ft_radix_sort(&liste, &listeb, &bench_count);
+	else 
+		ft_adaptiv_alg(ft_compute_disorder(&liste), &liste, &listeb, &bench_count);
+	ft_printf("Apres : ");
 	tmp = liste;
 	while (tmp)
 	{
-		//ft_printf("%d ->", tmp->data);
+		ft_printf("%d ->", tmp->data);
 		tmp = tmp->next;
 	}
-	//ft_printf("NULL\n");
-
+	ft_printf("NULL\n");
 	tmpb = listeb;
 	while (tmpb)
 	{
-		//ft_printf("%d ->", tmpb->data);
+		ft_printf("%d ->", tmpb->data);
 		tmpb = tmpb->next;
 	}
-	//ft_printf("NULL\n");
-
+	ft_printf("NULL\n");
+	if (flags[1] == 1)
+		ft_benchmark(&bench_count);
 	return (0);
 }

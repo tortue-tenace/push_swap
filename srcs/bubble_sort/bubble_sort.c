@@ -6,13 +6,13 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:35:56 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/14 12:16:29 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/14 14:56:46 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_bubble_sort(t_list **a)
+void	ft_bubble_sort(t_list **a, t_count *bench_count)
 {
 	t_list	**temp;
 	int		i;
@@ -28,7 +28,7 @@ void	ft_bubble_sort(t_list **a)
 		while (i < size - 1)
 		{
 			if ((*temp)->data > (*temp)->next->data)
-				sa(temp);
+				sa(temp, bench_count);
 			(temp) = &(*temp)->next;
 			i++;
 		}

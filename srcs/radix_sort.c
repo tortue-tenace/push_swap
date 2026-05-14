@@ -6,7 +6,7 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 10:59:26 by lmurie            #+#    #+#             */
-/*   Updated: 2026/05/13 15:10:01 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/14 14:59:56 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void adddel_min(t_list **a, int min, int sorted)
 	}
 }
 
-void ft_radix_sort(t_list **a, t_list **b)
+void ft_radix_sort(t_list **a, t_list **b, t_count *bench_count)
 {
 	int i;
 	int nbdigits;
@@ -123,13 +123,13 @@ void ft_radix_sort(t_list **a, t_list **b)
 		while (i < size)
 		{
 			if (((*a)->data >> j) & 1)
-				ra(a);
+				ra(a, bench_count);
 			else
-				pb(a, b);
+				pb(a, b, bench_count);
 			i++;
 		}
 		while (*b)
-			pa(a,b);
+			pa(a, b, bench_count);
 		i = 0;
 		j++;
 	}

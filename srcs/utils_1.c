@@ -26,11 +26,15 @@ int	get_data(t_list *a)
 	return (a->data);
 }
 
-void	rrr(t_list **a, t_list **b)
+void	rrr(t_list **a, t_list **b, t_count *bench_count)
 {
-	rra(a);
-	rrb(b);
+	rra(a, bench_count);
+	rrb(b, bench_count);
 	ft_printf("%s\n", "rrr");
+	bench_count->rrr++;
+	bench_count->rra--;
+	bench_count->rrb--;
+	bench_count->total = bench_count->total - 1;
 }
 
 t_list	*ft_lstnew(int number)
