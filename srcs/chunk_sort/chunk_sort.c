@@ -6,7 +6,7 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 14:18:10 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/14 13:40:16 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/15 13:40:16 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ static int	ft_chunk_size(int size)
 
 void	ft_chunk_sort(t_list **a, t_list **b, t_count *bench_count)
 {
-	int	size;
-	int	chunk_size;
-	int	chunk;
-	int	min_val;
-	int	max_val;
-	int	*sorted;
+	int		size;
+	int		chunk_size;
+	int		chunk;
+	int		*sorted;
+	t_range	rng;
 
 	size = ft_lstsize(*a);
 	sorted = ft_prepare(*a, size);
@@ -50,9 +49,9 @@ void	ft_chunk_sort(t_list **a, t_list **b, t_count *bench_count)
 	chunk = 0;
 	while (*a)
 	{
-		min_val = chunk_size * chunk;
-		max_val = chunk_size * (chunk + 1);
-		ft_push_chunk(a, b, min_val, max_val, bench_count);
+		rng.min = chunk_size * chunk;
+		rng.max = chunk_size * (chunk + 1);
+		ft_push_chunk(a, b, rng, bench_count);
 		chunk++;
 	}
 	ft_back_to_a(a, b, bench_count);

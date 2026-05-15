@@ -16,9 +16,12 @@ CFLAGS	= -Wall -Wextra -Werror -g
 RM		= rm -f
 FTPRINTF = ./printf/libftprintf.a
 SRCS	= srcs/main.c \
+		  srcs/parse.c \
+		  srcs/parse2.c \
 		  srcs/utils.c \
 		  srcs/utils_1.c \
 		  srcs/ft_benchmark.c \
+		  srcs/ft_benchmark2.c \
 		  srcs/operations/push.c \
 		  srcs/operations/rotate.c \
 		  srcs/operations/switch.c \

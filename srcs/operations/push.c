@@ -6,13 +6,13 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 12:19:20 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/14 13:19:55 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/15 13:19:55 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	pa(t_list **a, t_list **b, t_count	*bench_count)
+void	pa(t_list **a, t_list **b, t_count *bench_count)
 {
 	t_list	*tmp;
 
@@ -27,7 +27,7 @@ void	pa(t_list **a, t_list **b, t_count	*bench_count)
 	bench_count->total++;
 }
 
-void	pb(t_list **a, t_list **b, t_count	*bench_count)
+void	pb(t_list **a, t_list **b, t_count *bench_count)
 {
 	t_list	*tmp;
 

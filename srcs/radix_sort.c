@@ -3,138 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmurie <lmurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 10:59:26 by lmurie            #+#    #+#             */
-/*   Updated: 2026/05/14 14:59:56 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/15 12:50:01 by lmurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int min (t_list **a)
+static int	get_min(t_list **a)
 {
-	int minvalue;
-	int size;
-	int	i;
-	t_list **temp;
+	int		min;
+	t_list	*tmp;
 
-	i = 0;
-	temp = a;
-	size = ft_lstsize(*a);
-	minvalue = (*a)->data;
-	while (i < size - 1)
+	tmp = *a;
+	min = tmp->data;
+	while (tmp)
 	{
-		if ((*temp)->data < minvalue)
-			minvalue = (*temp)->data;
-		i++;
-		(temp) = &(*temp)->next;
+		if (tmp->data < min)
+			min = tmp->data;
+		tmp = tmp->next;
 	}
-	return (minvalue);
+	return (min);
 }
 
-int max (t_list **a)
+static int	count_max_bits(t_list **a)
 {
-	int maxvalue;
-	int size;
-	int	i;
-	t_list **temp;
+	int		n;
+	int		bits;
+	t_list	*tmp;
 
-	i = 0;
-	temp = a;
+	tmp = *a;
+	n = tmp->data;
+	while (tmp)
+	{
+		if (tmp->data > n)
+			n = tmp->data;
+		tmp = tmp->next;
+	}
+	bits = 0;
+	while (n > 0)
+	{
+		bits++;
+		n >>= 1;
+	}
+	return (bits);
+}
+
+static void	adjust_min(t_list **a, int min_val, int restore)
+{
+	t_list	*tmp;
+
+	tmp = *a;
+	if (!restore)
+	{
+		while (tmp)
+		{
+			tmp->data -= min_val;
+			tmp = tmp->next;
+		}
+	}
+	else
+	{
+		while (tmp)
+		{
+			tmp->data += min_val;
+			tmp = tmp->next;
+		}
+	}
+}
+
+static void	ft_radix_pass(t_list **a, t_list **b, int j, t_count *bench_count)
+{
+	int	i;
+	int	size;
+
 	size = ft_lstsize(*a);
-	maxvalue = (*a)->data;
+	i = 0;
 	while (i < size)
 	{
-		if ((*temp)->data > maxvalue)
-			maxvalue = (*temp)->data;
+		if (((*a)->data >> j) & 1)
+			ra(a, bench_count);
+		else
+			pb(a, b, bench_count);
 		i++;
-		(temp) = &(*temp)->next;
 	}
-	return (maxvalue);
+	while (*b)
+		pa(a, b, bench_count);
 }
 
-
-char	*decimaltobinary(int a)
+void	ft_radix_sort(t_list **a, t_list **b, t_count *bench_count)
 {
-	char *tab;
-	int	i;
-
-	i = 0;
-	tab=malloc(sizeof(char) * 100);
-	while (a != 0)
-	{
-		tab[i] = a%2 + '0';
-		printf("%d", a%2);
-		a /= 2;
-		i++;
-
-	}
-	tab[i] = '\0';
-	return (tab);
-}
-void adddel_min(t_list **a, int min, int sorted)
-{
-	t_list *temp;
-
-	temp = (*a);
-	if (sorted == 0)
-	{
-		while (temp)
-		{
-			(temp)->data -= min;
-			(temp) = (temp)->next;
-		}
-	}
-	else 
-	{ 
-		while (temp)
-		{
-			(temp)->data += min;
-			(temp) = (temp)->next;
-		}
-	}
-}
-
-void ft_radix_sort(t_list **a, t_list **b, t_count *bench_count)
-{
-	int i;
-	int nbdigits;
-	int size;
 	int	j;
+	int	nbdigits;
+	int	min_val;
 
-	
-	int temp;
-	
-	temp = 0;
-	
-	i = 0;
 	j = 0;
-	size = ft_lstsize(*a);
-	if (min(a) < 0)
+	min_val = 0;
+	if (get_min(a) < 0)
 	{
-		temp = min(a);
-		adddel_min(a, temp, j);
+		min_val = get_min(a);
+		adjust_min(a, min_val, 0);
 	}
-	
-	nbdigits = ft_strlen(decimaltobinary(max(a)));
+	nbdigits = count_max_bits(a);
 	while (j < nbdigits)
 	{
-		while (i < size)
-		{
-			if (((*a)->data >> j) & 1)
-				ra(a, bench_count);
-			else
-				pb(a, b, bench_count);
-			i++;
-		}
-		while (*b)
-			pa(a, b, bench_count);
-		i = 0;
+		ft_radix_pass(a, b, j, bench_count);
 		j++;
 	}
-	
-	if (temp < 0)
-		adddel_min(a, temp, j);
-	
+	if (min_val < 0)
+		adjust_min(a, min_val, 1);
 }

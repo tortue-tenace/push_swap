@@ -6,7 +6,7 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:35:56 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/14 14:56:46 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/15 14:56:46 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_bubble_sort(t_list **a, t_count *bench_count)
 		{
 			if ((*temp)->data > (*temp)->next->data)
 				sa(temp, bench_count);
-			(temp) = &(*temp)->next;
+			temp = &(*temp)->next;
 			i++;
 		}
 		temp = a;

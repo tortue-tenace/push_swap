@@ -6,13 +6,13 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 11:21:40 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/14 13:23:52 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/15 13:23:52 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	sa(t_list **a, t_count	*bench_count)
+void	sa(t_list **a, t_count *bench_count)
 {
 	t_list	*first;
 	t_list	*second;
@@ -29,7 +29,7 @@ void	sa(t_list **a, t_count	*bench_count)
 	bench_count->total++;
 }
 
-void	sb(t_list **b, t_count	*bench_count)
+void	sb(t_list **b, t_count *bench_count)
 {
 	t_list	*first;
 	t_list	*second;
@@ -46,7 +46,7 @@ void	sb(t_list **b, t_count	*bench_count)
 	bench_count->total++;
 }
 
-void	ss(t_list **a, t_list **b, t_count	*bench_count)
+void	ss(t_list **a, t_list **b, t_count *bench_count)
 {
 	if (ft_lstsize(*b) <= 1 || ft_lstsize(*a) <= 1)
 		return ;

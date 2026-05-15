@@ -6,7 +6,7 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 12:53:38 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/14 14:55:27 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/15 14:55:27 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,28 @@ void	ft_rotate_to_max(t_list **b, int max, t_count *bench_count)
 	}
 }
 
-void ft_push_chunk(t_list **a, t_list **b, int min_val, int max_val, t_count *bench_count)
+void	ft_push_chunk(t_list **a, t_list **b, t_range rng, t_count *bench_count)
 {
-    int len;
-    int i;
+	int	len;
+	int	i;
 
-    len = ft_lstsize(*a);
-    i = 0;
-    while (i < len && *a)
-    {
-        if (get_data(*a) >= min_val && get_data(*a) < max_val)
-        {
-            pb(a, b, bench_count);
-            len--;
-            if (*b && (*b)->next && get_data(*b) < (*b)->next->data)
-                rb(b, bench_count);
-        }
-        else
-        {
-            ra(a, bench_count);
-            i++;
-        }
-    }
+	len = ft_lstsize(*a);
+	i = 0;
+	while (i < len && *a)
+	{
+		if (get_data(*a) >= rng.min && get_data(*a) < rng.max)
+		{
+			pb(a, b, bench_count);
+			len--;
+			if (*b && (*b)->next && get_data(*b) < (*b)->next->data)
+				rb(b, bench_count);
+		}
+		else
+		{
+			ra(a, bench_count);
+			i++;
+		}
+	}
 }
 
 void	ft_back_to_a(t_list **a, t_list **b, t_count *bench_count)

@@ -6,7 +6,7 @@
 /*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:05:12 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/14 15:03:58 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/15 11:30:45 by thattal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 float	ft_compute_disorder(t_list **a)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	mistakes;
-	unsigned int	total_pairs;
-	unsigned int	size;
+	int	i;
+	int	j;
+	int	mistakes;
+	int	total_pairs;
+	int	size;
 
 	mistakes = 0;
 	total_pairs = 0;
@@ -41,7 +41,8 @@ float	ft_compute_disorder(t_list **a)
 	return ((float)mistakes / (float)total_pairs);
 }
 
-void	ft_adaptiv_alg(float disorder, t_list **stack_a, t_list **stack_b, t_count *bench_count)
+void	ft_adaptiv_alg(float disorder, t_list **stack_a, t_list **stack_b,
+		t_count *bench_count)
 {
 	if (disorder < 0.2)
 		ft_bubble_sort(stack_a, bench_count);
