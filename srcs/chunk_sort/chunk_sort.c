@@ -12,13 +12,20 @@
 
 #include "../push_swap.h"
 
-static int	*ft_prepare(t_list *a, int size)
+int	*ft_prepare(t_list *a, int size)
 {
 	int	*orig;
 	int	*sorted;
 
 	orig = ft_save_orig(a, size);
+	if (!orig)
+		return (NULL);
 	sorted = malloc(sizeof(int) * size);
+	if (!sorted)
+	{
+		free(orig);
+		return (NULL);
+	}
 	ft_sorted_orig(orig, sorted, size);
 	ft_normalize(a, orig, size);
 	free(orig);
@@ -45,6 +52,8 @@ void	ft_chunk_sort(t_list **a, t_list **b, t_count *bench_count)
 
 	size = ft_lstsize(*a);
 	sorted = ft_prepare(*a, size);
+	if (!sorted)
+		return ;
 	chunk_size = ft_chunk_size(size);
 	chunk = 0;
 	while (*a)

@@ -84,4 +84,5 @@ void	init_bench_count(t_count *bench_count)
 	bench_count->total = 0;
 	bench_count->disorder = 0.0f;
 	bench_count->algo = 0;
+	bench_count->sub_algo = 0;
 }

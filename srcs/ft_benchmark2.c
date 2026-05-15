@@ -12,16 +12,38 @@
 
 #include "./push_swap.h"
 
-static void	print_strategy(int algo)
+static void	print_complexity(int kind)
 {
-	if (algo == 0)
-		ft_putstr_fd("Adaptive", 2);
-	else if (algo == 1)
-		ft_putstr_fd("Simple / O(n\xc2\xb2)", 2);
-	else if (algo == 2)
-		ft_putstr_fd("Medium / O(n\xe2\x88\x9an)", 2);
-	else if (algo == 3)
-		ft_putstr_fd("Complex / O(n log n)", 2);
+	if (kind == 1)
+		ft_putstr_fd("O(n\xc2\xb2)", 2);
+	else if (kind == 2)
+		ft_putstr_fd("O(n\xe2\x88\x9an)", 2);
+	else if (kind == 3)
+		ft_putstr_fd("O(n log n)", 2);
+}
+
+static void	print_strategy(t_count *c)
+{
+	if (c->algo == 0)
+	{
+		ft_putstr_fd("Adaptive / ", 2);
+		print_complexity(c->sub_algo);
+	}
+	else if (c->algo == 1)
+	{
+		ft_putstr_fd("Simple / ", 2);
+		print_complexity(1);
+	}
+	else if (c->algo == 2)
+	{
+		ft_putstr_fd("Medium / ", 2);
+		print_complexity(2);
+	}
+	else if (c->algo == 3)
+	{
+		ft_putstr_fd("Complex / ", 2);
+		print_complexity(3);
+	}
 }
 
 static void	print_ops_sa(t_count *c)
@@ -62,7 +84,7 @@ void	ft_benchmark(t_count *c)
 	ft_putfloat2_fd(c->disorder, 2);
 	ft_putstr_fd("%\n", 2);
 	ft_putstr_fd("[bench] strategy: ", 2);
-	print_strategy(c->algo);
+	print_strategy(c);
 	ft_putstr_fd("\n", 2);
 	ft_putstr_fd("[bench] total_ops: ", 2);
 	ft_putnbr_fd(c->total, 2);

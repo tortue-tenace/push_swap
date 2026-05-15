@@ -45,6 +45,7 @@ typedef struct s_count
 	int				total;
 	float			disorder;
 	int				algo;
+	int				sub_algo;
 }					t_count;
 
 void				ft_bubble_sort(t_list **a, t_count *bench_count);
@@ -68,6 +69,7 @@ void				rra(t_list **a, t_count *bench_count);
 void				rrb(t_list **b, t_count *bench_count);
 void				rrr(t_list **a, t_list **b, t_count *bench_count);
 void				ft_chunk_sort(t_list **a, t_list **b, t_count *bench_count);
+int					*ft_prepare(t_list *a, int size);
 void				ft_radix_sort(t_list **a, t_list **b, t_count *bench_count);
 void				ft_adaptiv_alg(float disorder, t_list **stack_a,
 						t_list **stack_b, t_count *bench_count);
@@ -88,7 +90,7 @@ void				ft_putfloat2_fd(float f, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putnbr_fd(int n, int fd);
-int					ft_strncmp(char *s1, char *s2, int n);
+int					ft_streq(char *s1, char *s2);
 int					ft_atoi(const char *str);
 int					isflag(char *s);
 void				detectflags(int argc, char *argv[], int flags[2]);

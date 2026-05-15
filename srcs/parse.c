@@ -12,18 +12,18 @@
 
 #include "push_swap.h"
 
-int	ft_strncmp(char *s1, char *s2, int n)
+int	ft_streq(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
-	while (i < n)
+	while (s1[i] && s2[i])
 	{
-		if ((unsigned char)s1[i] != (unsigned char)s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		if (s1[i] != s2[i])
+			return (0);
 		i++;
 	}
-	return (0);
+	return (s1[i] == s2[i]);
 }
 
 static int	is_space(char c)
@@ -59,15 +59,15 @@ int	ft_atoi(const char *str)
 
 int	isflag(char *s)
 {
-	if (ft_strncmp(s, "--simple", ft_strlen(s)) == 0)
+	if (ft_streq(s, "--simple"))
 		return (1);
-	else if (ft_strncmp(s, "--medium", ft_strlen(s)) == 0)
+	if (ft_streq(s, "--medium"))
 		return (1);
-	else if (ft_strncmp(s, "--complex", ft_strlen(s)) == 0)
+	if (ft_streq(s, "--complex"))
 		return (1);
-	else if (ft_strncmp(s, "--adaptive", ft_strlen(s)) == 0)
+	if (ft_streq(s, "--adaptive"))
 		return (1);
-	else if (ft_strncmp(s, "--bench", ft_strlen(s)) == 0)
+	if (ft_streq(s, "--bench"))
 		return (1);
 	return (0);
 }
@@ -81,13 +81,13 @@ void	detectflags(int argc, char *argv[], int flags[2])
 	flags[1] = 0;
 	while (i < argc && isflag(argv[i]))
 	{
-		if (ft_strncmp(argv[i], "--simple", ft_strlen(argv[i])) == 0)
+		if (ft_streq(argv[i], "--simple"))
 			flags[0] = 1;
-		else if (ft_strncmp(argv[i], "--medium", ft_strlen(argv[i])) == 0)
+		else if (ft_streq(argv[i], "--medium"))
 			flags[0] = 2;
-		else if (ft_strncmp(argv[i], "--complex", ft_strlen(argv[i])) == 0)
+		else if (ft_streq(argv[i], "--complex"))
 			flags[0] = 3;
-		else if (ft_strncmp(argv[i], "--bench", ft_strlen(argv[i])) == 0)
+		else if (ft_streq(argv[i], "--bench"))
 			flags[1] = 1;
 		i++;
 	}
