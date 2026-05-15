@@ -8,11 +8,6 @@ Push_swap is a sorting algorithm project using two stacks (`a` and `b`) and a li
 
 The program implements four distinct sorting strategies, each targeting a different complexity class in the Push_swap operation model, and selects the appropriate one at runtime based on a flag or the measured disorder of the input.
 
-## Contributions
-
-- **thattal**: parsing, error handling, operations, selection sort, chunk sort, adaptive routing, benchmark mode
-- **lmurie**: radix sort (complex strategy), chunk-sort pull-back, tests on large inputs
-
 ## Instructions
 
 ### Compilation
@@ -33,7 +28,7 @@ Builds `push_swap` after compiling the bundled `ft_printf` static library.
 
 | Flag | Strategy | Complexity |
 |---|---|---|
-| `--simple` | Selection sort | O(n²) |
+| `--simple` | Bubble sort | O(n²) |
 | `--medium` | Chunk sort (√n buckets) | O(n√n) |
 | `--complex` | Radix sort (binary, LSD) | O(n log n) |
 | `--adaptive` | Picks a strategy from measured disorder (default) | depends |
@@ -137,7 +132,6 @@ Numbers are random; results vary across runs. Forcing `--medium` typically gives
 
 ### AI Usage
 
-Claude (Anthropic) was used as a pair-programming partner for:
 - **Debugging**: reviewing the parser, the chunk-sort push/pull phases, and tracking down the bug where the original `--simple` implementation called `sa` on arbitrary list positions instead of the top of the stack.
 - **Conceptual explanations**: rank normalization for radix and chunk sort, choosing thresholds for the adaptive dispatch, and arguments about operation-model complexity vs. classical big-O.
 
