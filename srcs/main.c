@@ -6,7 +6,7 @@
 /*   By: lmurie <lmurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:01:35 by lmurie            #+#    #+#             */
-/*   Updated: 2026/05/17 14:54:28 by lmurie           ###   ########.fr       */
+/*   Updated: 2026/05/17 14:59:13 by lmurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(int argc, char *argv[])
 {
 	t_list	*liste;
 	t_list	*listeb;
-	//t_list *temp;
 	int		flags[2];
 	t_count	bench_count;
 
@@ -59,23 +58,7 @@ int	main(int argc, char *argv[])
 		ft_lstclear(&liste);
 		return (0);
 	}
-	// printf("Avant :");
-	// temp = liste;
-	// while (temp)
-	// {
-	// 	printf("%d->",temp->data);
-	// 	temp = temp->next;
-	// }
-	// printf("NULL\n");
 	ft_run_algo(flags[0], &liste, &listeb, &bench_count);
-	// printf("Apres :");
-	// temp = liste;
-	// while (temp)
-	// {
-	// 	printf("%d->",temp->data);
-	// 	temp = temp->next;
-	// }
-	// printf("NULL\n");
 	ft_lstclear(&liste);
 	ft_lstclear(&listeb);
 	if (flags[1] == 1)
