@@ -6,7 +6,7 @@
 /*   By: lmurie <lmurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 17:00:00 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/17 10:59:20 by lmurie           ###   ########.fr       */
+/*   Updated: 2026/05/17 14:18:19 by lmurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int	isflag(char *s)
 		return (1);
 	if (ft_strncmp(s, "--complex", ft_strlen(s)) == 0)
 		return (1);
-	if (ft_stncmp(s, "--adaptive", ft_strlen(s)) == 0)
+	if (ft_strncmp(s, "--adaptive", ft_strlen(s)) == 0)
 		return (1);
-	if (ft_strncmp(s, "--bench", , ft_strlen(s)) == 0)
+	if (ft_strncmp(s, "--bench", ft_strlen(s)) == 0)
 		return (1);
 	return (0);
 }
@@ -81,15 +81,15 @@ void	detectflags(int argc, char *argv[], int flags[2])
 	flags[1] = 0;
 	while (i < argc && isflag(argv[i]))
 	{
-		if (ft_strncmp(argv[i], "--simple", ft_strlen(s)) == 0)
+		if (ft_strncmp(argv[i], "--simple", ft_strlen(argv[i])) == 0)
 			flags[0] = 1;
-		else if (ft_strncmp(argv[i], "--medium", ft_strlen(s)) == 0)
+		else if (ft_strncmp(argv[i], "--medium", ft_strlen(argv[i])) == 0)
 			flags[0] = 2;
-		else if (ft_strncmp(argv[i], "--complex", ft_strlen(s)) == 0)
+		else if (ft_strncmp(argv[i], "--complex", ft_strlen(argv[i])) == 0)
 			flags[0] = 3;
-		else if (ft_strncmp(argv[i], "--adaptive", ft_strlen(s)) == 0)
+		else if (ft_strncmp(argv[i], "--adaptive", ft_strlen(argv[i])) == 0)
 			flags[0] = 3;
-		else if (ft_strncmp(argv[i], "--bench", ft_strlen(s)) == 0)
+		else if (ft_strncmp(argv[i], "--bench", ft_strlen(argv[i])) == 0)
 			flags[1] = 1;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lmurie <lmurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:01:35 by lmurie            #+#    #+#             */
-/*   Updated: 2026/05/17 11:11:07 by lmurie           ###   ########.fr       */
+/*   Updated: 2026/05/17 14:16:21 by lmurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	ft_run_algo(int flag, t_list **liste,
 
 int	main(int argc, char *argv[])
 {
-	// t_list	*liste;
+	t_list	*liste;
 	t_list	*listeb;
-	t_list *temp;
+	//t_list *temp;
 	int		flags[2];
 	t_count	bench_count;
 
