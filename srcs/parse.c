@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thattal <thattal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmurie <lmurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 17:00:00 by thattal           #+#    #+#             */
-/*   Updated: 2026/05/15 17:00:00 by thattal          ###   ########.fr       */
+/*   Updated: 2026/05/17 10:59:20 by lmurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_streq(char *s1, char *s2)
+int	ft_strncmp(char *s1, char *s2, int n)
 {
 	int	i;
 
 	i = 0;
-	while (s1[i] && s2[i])
+	while (i < n)
 	{
-		if (s1[i] != s2[i])
-			return (0);
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	return (s1[i] == s2[i]);
+	return (0);
 }
 
 static int	is_space(char c)
@@ -59,15 +59,15 @@ int	ft_atoi(const char *str)
 
 int	isflag(char *s)
 {
-	if (ft_streq(s, "--simple"))
+	if (ft_strncmp(s, "--simple", ft_strlen(s)) == 0)
 		return (1);
-	if (ft_streq(s, "--medium"))
+	if (ft_strncmp(s, "--medium", ft_strlen(s)) == 0)
 		return (1);
-	if (ft_streq(s, "--complex"))
+	if (ft_strncmp(s, "--complex", ft_strlen(s)) == 0)
 		return (1);
-	if (ft_streq(s, "--adaptive"))
+	if (ft_stncmp(s, "--adaptive", ft_strlen(s)) == 0)
 		return (1);
-	if (ft_streq(s, "--bench"))
+	if (ft_strncmp(s, "--bench", , ft_strlen(s)) == 0)
 		return (1);
 	return (0);
 }
@@ -81,13 +81,15 @@ void	detectflags(int argc, char *argv[], int flags[2])
 	flags[1] = 0;
 	while (i < argc && isflag(argv[i]))
 	{
-		if (ft_streq(argv[i], "--simple"))
+		if (ft_strncmp(argv[i], "--simple", ft_strlen(s)) == 0)
 			flags[0] = 1;
-		else if (ft_streq(argv[i], "--medium"))
+		else if (ft_strncmp(argv[i], "--medium", ft_strlen(s)) == 0)
 			flags[0] = 2;
-		else if (ft_streq(argv[i], "--complex"))
+		else if (ft_strncmp(argv[i], "--complex", ft_strlen(s)) == 0)
 			flags[0] = 3;
-		else if (ft_streq(argv[i], "--bench"))
+		else if (ft_strncmp(argv[i], "--adaptive", ft_strlen(s)) == 0)
+			flags[0] = 3;
+		else if (ft_strncmp(argv[i], "--bench", ft_strlen(s)) == 0)
 			flags[1] = 1;
 		i++;
 	}
