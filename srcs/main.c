@@ -6,7 +6,7 @@
 /*   By: lmurie <lmurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 14:01:35 by lmurie            #+#    #+#             */
-/*   Updated: 2026/05/17 14:16:21 by lmurie           ###   ########.fr       */
+/*   Updated: 2026/05/17 14:54:28 by lmurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char *argv[])
 	bench_count.algo = flags[0];
 	liste = addarg(argc, argv);
 	bench_count.disorder = ft_compute_disorder(&liste) * 100.0f;
-	if (is_sorted(liste) == 1)
+	if (is_sorted(liste) == 1 && flags[1] == 0)
 	{
 		ft_lstclear(&liste);
 		return (0);
